@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  position: relative;
+}
+nav {
+  background-color: #3dbafc;
+  overflow: hidden;
+}
+nav a {
+  color: #092f44;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 48px;
+  padding: 0 0 0 15px;
+  height: 100%;
+  margin-right: 20px;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+nav a.router-link-active {
+  color: #ffffff;
+}

@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col l6 m12 s12">
+    <md-toolbar-row>
+      <span>{{dataDiagnoses.title}}</span>
+    </md-toolbar-row>
+    <grid-data [records]="dataDiagnoses.records" [columns]="dataDiagnoses.columns"  [additionElements] = "dataDiagnoses.buttons"></grid-data>
+  </div>
+  <div class="col l6 m12 s12">
+    <md-toolbar-row>
+      <span>{{dataHistory.title}}</span>
+    </md-toolbar-row>
+    <grid-data [records]="dataHistory.records" [columns]="dataHistory.columns"></grid-data>
+  </div>
+</div>

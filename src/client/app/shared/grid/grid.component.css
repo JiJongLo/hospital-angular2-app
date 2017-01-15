@@ -1,0 +1,12 @@
+.button-table {
+    display: flex;
+    justify-content: space-between;
+}
+button {
+    box-shadow : none;
+    background-color: inherit;
+}
+button:hover {
+    box-shadow : inherit;
+    background-color: white;
+}

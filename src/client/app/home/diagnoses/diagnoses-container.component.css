@@ -1,0 +1,22 @@
+.container-height {
+  height: 100%;
+}
+.container-patient {
+  background-color: grey;
+}
+.breadcrumb-container {
+  background-color: white;
+}
+.reset-padding {
+  padding: 0;
+}
+.breadcrumb-container a{
+  cursor: pointer;
+  color : #00b0e8;
+}
+.breadcrumb-container a:last-child{
+  color : grey;
+}
+.breadcrumb:before {
+  color : grey;
+}
