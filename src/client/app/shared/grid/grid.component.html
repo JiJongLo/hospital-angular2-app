@@ -8,9 +8,9 @@
   <tr *ngFor="let record of records">
     <td *ngFor="let column of columns">{{ record[column.name] }}</td>
     <td class="button-table" *ngIf="additionElements.length">
-      <button md-mini-fab *ngFor="let elem of additionElements">
-        <md-icon class="md-24" color = "{{elem.color}}">{{elem.name}}</md-icon>
-      </button>
+      <a *ngFor="let elem of additionElements" routerLink="{{elem.link}}" class="{{elem.className}}"><button md-mini-fab >
+        <md-icon class="md-24">{{elem.name}}</md-icon>
+      </button></a>
     </td>
   </tr>
   </tbody>

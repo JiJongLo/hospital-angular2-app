@@ -10,3 +10,6 @@ button:hover {
     box-shadow : inherit;
     background-color: white;
 }
+a {
+    color : inherit;
+}

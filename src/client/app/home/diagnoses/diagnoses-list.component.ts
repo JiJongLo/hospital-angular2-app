@@ -3,7 +3,6 @@ import { Component, OnInit }      from '@angular/core';
 import { DiagnosesListService } from '../../shared/index';
 import { Diagnosis } from './Diagnosis';
 import { Location } from '@angular/common';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
     moduleId: module.id,
@@ -17,7 +16,7 @@ export class DiagnosesListComponent implements OnInit{
   dataCurrentDiagnoses : any = {
     title : 'Current Diagnoses',
     records : [],
-    buttons: [{name : 'edit', color : 'white'}, {name : 'delete', color: 'red'}]
+    buttons: [{name : 'edit', className : 'edit', link : '../edit'}, {name : 'delete', className : 'delete', link : '../delete'}]
   };
   dataHistoryDiagnoses : any = {
     title : 'Diagnoses History',
