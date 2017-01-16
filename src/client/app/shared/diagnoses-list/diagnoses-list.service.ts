@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { Location } from '@angular/common';
 import { Diagnosis } from '../../home/diagnoses/Diagnosis';
 import 'rxjs/add/operator/do';  // for debugging
 import 'rxjs/add/operator/pluck';
@@ -11,7 +12,6 @@ import 'rxjs/add/operator/filter';
  */
 @Injectable()
 export class DiagnosesListService {
-
   /**
    * Creates a new NameListService with the injected Http.
    * @param {Http} http - The injected Http.
@@ -36,15 +36,19 @@ export class DiagnosesListService {
                     })
                     .catch(this.handleError);
   }
-
-  getDiagnoses(id: number): Promise<any> {
+  getPatient(id: number): Promise<any> {
     return new Promise (resolve => {
       this.get().subscribe(
         data => {
-          const filteredDiagnoses = data.diagnoses.filter((diagnosis:Diagnosis)  => diagnosis.patientId === id);
-          const currentPatient = data.patients.find((patient:any) => patient.id === id);
-          return resolve({diagnoses : filteredDiagnoses, patient : currentPatient});
+          return resolve(data.patients.find((patient:any) => patient.id === id));
         }
+      );
+    });
+  }
+  getDiagnoses(id: number): Promise<any> {
+    return new Promise (resolve => {
+      this.get().subscribe(
+        data => resolve(data.diagnoses.filter((diagnosis:Diagnosis)  => diagnosis.patientId === id))
       );
     });
   }

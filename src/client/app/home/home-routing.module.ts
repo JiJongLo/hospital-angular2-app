@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
-import { DiagnosesContainerComponent, DiagnosisEditComponent, DiagnosesListComponent} from './diagnoses/index';
+import { DiagnosesContainerComponent, DiagnosisEditComponent, DiagnosesListComponent } from './diagnoses/index';
 
 @NgModule({
   imports: [
@@ -13,10 +13,12 @@ import { DiagnosesContainerComponent, DiagnosisEditComponent, DiagnosesListCompo
         children: [
           {
             path: 'list',
+            pathMatch: 'full',
             component: DiagnosesListComponent
           },
           {
             path: 'edit',
+            pathMatch: 'full',
             component: DiagnosisEditComponent
           }
         ]

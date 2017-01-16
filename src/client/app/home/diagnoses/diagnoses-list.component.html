@@ -1,14 +1,14 @@
 <div class="row">
   <div class="col l6 m12 s12">
     <md-toolbar-row>
-      <span>{{dataDiagnoses.title}}</span>
+      <span>{{dataCurrentDiagnoses.title}}</span>
     </md-toolbar-row>
-    <grid-data [records]="dataDiagnoses.records" [columns]="dataDiagnoses.columns"  [additionElements] = "dataDiagnoses.buttons"></grid-data>
+    <grid-data [records]="dataCurrentDiagnoses.records" [columns]="dataCurrentDiagnoses.columns"  [additionElements] = "dataCurrentDiagnoses.buttons"></grid-data>
   </div>
   <div class="col l6 m12 s12">
     <md-toolbar-row>
-      <span>{{dataHistory.title}}</span>
+      <span>{{dataHistoryDiagnoses.title}}</span>
     </md-toolbar-row>
-    <grid-data [records]="dataHistory.records" [columns]="dataHistory.columns"></grid-data>
+    <grid-data [records]="dataHistoryDiagnoses.records" [columns]="dataHistoryDiagnoses.columns"></grid-data>
   </div>
 </div>
