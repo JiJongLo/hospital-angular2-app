@@ -16,11 +16,7 @@ export class GridComponent {
     constructor(
       private diagnosesListService: DiagnosesListService
     ) {}
-    handle (data: any){
-       this.diagnosesListService.handleEvent(data).then(
-          data => {
-            console.log(data)
-          }
-       );
+    handle (data: any) {
+       this.diagnosesListService.handleEvent(data)
     }
 }

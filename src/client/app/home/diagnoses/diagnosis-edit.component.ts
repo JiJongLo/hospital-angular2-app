@@ -19,8 +19,8 @@ export class DiagnosisEditComponent implements OnInit {
         private location: Location
     ) {}
     ngOnInit(): void {
-      const id = +this.location.path().split('/')[2];
-      this.diagnosesListService.getCurrentDiagnosis(id)
-            .then(data => console.log(data));
+        this.route.params
+            .switchMap((params: Params) => this.diagnosesListService.editDiagnoses(+params['id']))
+            .subscribe(data =>  console.log(data));
     }
 }

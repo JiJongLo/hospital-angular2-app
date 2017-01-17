@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Router }       from '@angular/router';
+import { Location } from '@angular/common';
 import { Diagnosis } from '../../home/diagnoses/Diagnosis';
-import 'rxjs/add/operator/do';  // for debugging
+import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/operator/mergeAll';
 import 'rxjs/add/operator/filter';
@@ -17,7 +18,7 @@ export class DiagnosesListService {
    * @param {Http} http - The injected Http.
    * @constructor
    */
-  constructor(private http: Http, private router: Router) {}
+  constructor(private http: Http, private router: Router, private location: Location) {}
 
   /**
    * Returns an Observable for the HTTP GET request for the JSON resource.
@@ -40,7 +41,7 @@ export class DiagnosesListService {
     return new Promise (resolve => {
       this.get().subscribe(
         data => resolve(data.patients.find((patient:any) => patient.id === id))
-      )
+      );
     });
   }
   getDiagnoses(id: number): Promise<any> {
@@ -54,21 +55,20 @@ export class DiagnosesListService {
     return new Promise (resolve => {
       this.get().subscribe(
         data => resolve(data.diagnose)
-      )
+      );
     });
   }
-  handleEvent(data:any): Promise<any> {
-    return new Promise (resolve => {
-      if(data.type === "edit"){
-         return resolve(this.router.navigate([`${data.id}`]))
+  handleEvent(data:any): void {
+      if(data.type === 'edit') {
+          var path = this.location.path();
+          this.router.navigate([`${path}/${data.id}`]);
       }
-    });
   }
   editDiagnoses(id: number): Promise<any> {
     return new Promise (resolve => {
-      data => {
-        data => resolve(data.diagnoses.find((diagnosis:Diagnosis)  => diagnosis.code === id))
-      }
+      this.get().subscribe(
+          data => resolve(data.diagnoses.find((diagnosis:Diagnosis)  => +diagnosis.code === id))
+      );
     });
   }
   /**

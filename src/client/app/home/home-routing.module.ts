@@ -6,19 +6,18 @@ import { DiagnosesContainerComponent, DiagnosisEditComponent, DiagnosesListCompo
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'patients', component: HomeComponent },
+      { path: 'patients',
+        component: HomeComponent },
       {
         path: 'patients/:id',
         component: DiagnosesContainerComponent,
         children: [
           {
-            path: 'list',
-            pathMatch: 'full',
+            path: '',
             component: DiagnosesListComponent
           },
           {
             path: ':id',
-            pathMatch: 'full',
             component: DiagnosisEditComponent
           }
         ]
