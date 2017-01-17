@@ -17,7 +17,7 @@ import { DiagnosesContainerComponent, DiagnosisEditComponent, DiagnosesListCompo
             component: DiagnosesListComponent
           },
           {
-            path: 'edit',
+            path: ':id',
             pathMatch: 'full',
             component: DiagnosisEditComponent
           }

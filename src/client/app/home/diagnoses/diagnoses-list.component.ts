@@ -16,7 +16,7 @@ export class DiagnosesListComponent implements OnInit{
   dataCurrentDiagnoses : any = {
     title : 'Current Diagnoses',
     records : [],
-    buttons: [{name : 'edit', className : 'edit', link : '../edit'}, {name : 'delete', className : 'delete', link : '../delete'}]
+    buttons: [{name : 'edit', className : 'edit', link : 'edit'}, {name : 'delete', className : 'delete', link : 'delete'}]
   };
   dataHistoryDiagnoses : any = {
     title : 'Diagnoses History',

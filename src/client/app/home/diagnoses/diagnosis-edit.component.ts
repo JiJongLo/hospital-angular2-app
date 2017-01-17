@@ -3,6 +3,8 @@ import { Component, OnInit }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Diagnosis } from './Diagnosis';
 import { DiagnosesListService } from '../../shared/index';
+import { Location } from '@angular/common';
+
 @Component({
     moduleId: module.id,
     selector: 'diagnoses-edit',
@@ -13,11 +15,12 @@ export class DiagnosisEditComponent implements OnInit {
     currentDiagnosis: Diagnosis;
     constructor(
         private diagnosesListService: DiagnosesListService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private location: Location
     ) {}
     ngOnInit(): void {
-        this.route.params
-            .switchMap((params: Params) => this.diagnosesListService.getCurrentDiagnosis(+params['id']))
-            .subscribe(data => console.log(data));
+      const id = +this.location.path().split('/')[2];
+      this.diagnosesListService.getCurrentDiagnosis(id)
+            .then(data => console.log(data));
     }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { Location } from '@angular/common';
+import { Router }       from '@angular/router';
 import { Diagnosis } from '../../home/diagnoses/Diagnosis';
 import 'rxjs/add/operator/do';  // for debugging
 import 'rxjs/add/operator/pluck';
@@ -17,7 +17,7 @@ export class DiagnosesListService {
    * @param {Http} http - The injected Http.
    * @constructor
    */
-  constructor(private http: Http) {}
+  constructor(private http: Http, private router: Router) {}
 
   /**
    * Returns an Observable for the HTTP GET request for the JSON resource.
@@ -39,10 +39,8 @@ export class DiagnosesListService {
   getPatient(id: number): Promise<any> {
     return new Promise (resolve => {
       this.get().subscribe(
-        data => {
-          return resolve(data.patients.find((patient:any) => patient.id === id));
-        }
-      );
+        data => resolve(data.patients.find((patient:any) => patient.id === id))
+      )
     });
   }
   getDiagnoses(id: number): Promise<any> {
@@ -55,15 +53,24 @@ export class DiagnosesListService {
   getCurrentDiagnosis(id: number): Promise<any> {
     return new Promise (resolve => {
       this.get().subscribe(
-        data => {
-          const filteredDiagnoses = data.diagnoses.filter((diagnosis:Diagnosis)  => diagnosis.patientId === id);
-          const currentPatient = data.patients.find((patient:any) => patient.id === id);
-          return resolve({diagnoses : filteredDiagnoses, patient : currentPatient});
-        }
-      );
+        data => resolve(data.diagnose)
+      )
     });
   }
-
+  handleEvent(data:any): Promise<any> {
+    return new Promise (resolve => {
+      if(data.type === "edit"){
+         return resolve(this.router.navigate([`${data.id}`]))
+      }
+    });
+  }
+  editDiagnoses(id: number): Promise<any> {
+    return new Promise (resolve => {
+      data => {
+        data => resolve(data.diagnoses.find((diagnosis:Diagnosis)  => diagnosis.code === id))
+      }
+    });
+  }
   /**
     * Handle HTTP error
     */
