@@ -5,9 +5,9 @@ import { Router }       from '@angular/router';
 import { Location } from '@angular/common';
 import { Diagnosis } from '../../home/diagnoses/Diagnosis';
 import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/pluck';
-import 'rxjs/add/operator/mergeAll';
-import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/find';
+import 'rxjs/add/operator/mergeMap';
 /**
  * This class provides the List service with methods to read diagnoses and history.
  */
@@ -57,12 +57,10 @@ export class DiagnosesListService {
           this.router.navigate([`${path}/${data.id}`]);
       }
   }
-  editDiagnoses(id: number): Promise<any> {
-    return new Promise (resolve => {
-      this.get().subscribe(
-          data => resolve(data.diagnoses.find((diagnosis:Diagnosis)  => +diagnosis.code === id))
-      );
-    });
+  editDiagnoses(id: number): Observable<any> {
+    return this.get()
+        .flatMap(data => data.diagnoses)
+        .find((diagnosis:Diagnosis)  => +diagnosis.code === id);
   }
   /**
     * Handle HTTP error
