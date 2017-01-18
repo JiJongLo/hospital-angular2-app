@@ -15,12 +15,11 @@ export class DiagnosisEditComponent implements OnInit {
     currentDiagnosis: Diagnosis;
     constructor(
         private diagnosesListService: DiagnosesListService,
-        private route: ActivatedRoute,
-        private location: Location
+        private route: ActivatedRoute
     ) {}
     ngOnInit(): void {
         this.route.params
             .switchMap((params: Params) => this.diagnosesListService.editDiagnoses(+params['id']))
-            .subscribe(data =>  console.log(data));
+            .subscribe(data => this.currentDiagnosis = data);
     }
 }

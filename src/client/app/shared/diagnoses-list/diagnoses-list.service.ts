@@ -51,16 +51,9 @@ export class DiagnosesListService {
       );
     });
   }
-  getCurrentDiagnosis(id: number): Promise<any> {
-    return new Promise (resolve => {
-      this.get().subscribe(
-        data => resolve(data.diagnose)
-      );
-    });
-  }
   handleEvent(data:any): void {
       if(data.type === 'edit') {
-          var path = this.location.path();
+          const path = this.location.path();
           this.router.navigate([`${path}/${data.id}`]);
       }
   }
