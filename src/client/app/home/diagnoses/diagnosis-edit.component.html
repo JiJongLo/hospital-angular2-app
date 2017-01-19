@@ -1,7 +1,12 @@
 <md-toolbar>Edit  diagnosis:</md-toolbar>
-<md-input-container>
-  <input md-input placeholder="Name's diagnosis" value="{{diagnosis?.info}}">
-</md-input-container>
-<md-input-container>
-  <input md-input placeholder="Code of diagnosis" value="{{diagnosis?.code}}">
-</md-input-container>
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="form-group">
+        <label for="info">Name's diagnosis</label>
+        <input type="text" [(ngModel)]="diagnosis.info" name="info" class="form-control" id="info" required>
+    </div>
+    <div class="form-group">
+        <label for="info">Code's diagnosis</label>
+        <input type="text" [(ngModel)]="diagnosis.code" name="code" class="form-control" id="code" required>
+    </div>
+    <button md-button  type="submit" [disabled]="!f.valid">Save</button>
+</form>

@@ -1,5 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, OnInit }      from '@angular/core';
+import { NgForm }      from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Diagnosis } from './Diagnosis';
 import { DiagnosesListService } from '../../shared/index';
@@ -18,9 +19,14 @@ export class DiagnosisEditComponent implements OnInit {
     ngOnInit(): void {
         this.route.params
             .switchMap((params: Params) => this.diagnosesListService.editDiagnoses(+params['id']))
-            .subscribe(data => {
-                this.diagnosis = data;
-                console.log(this.diagnosis);
-            });
+            .subscribe(data => this.diagnosis = data);
+    }
+    onSubmit(form:NgForm) {
+        if (this.diagnosis) {
+         console.log(form.value);
+        } else {
+           form.reset();
+        }
+
     }
 }

@@ -7,9 +7,10 @@ import { HomeRoutingModule } from './home-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { DiagnosesListService } from '../shared/diagnoses-list/index';
 import { MaterialModule } from '@angular/material';
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, HomeRoutingModule, SharedModule, MaterialModule.forRoot()],
+  imports: [CommonModule, HomeRoutingModule, SharedModule, MaterialModule.forRoot(), FormsModule],
   declarations: [HomeComponent,
     PatientInfoComponent,
     DiagnosesListComponent,
