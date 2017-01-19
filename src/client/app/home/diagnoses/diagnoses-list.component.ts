@@ -16,11 +16,22 @@ export class DiagnosesListComponent implements OnInit{
   dataCurrentDiagnoses : any = {
     title : 'Current Diagnoses',
     records : [],
-    buttons: [{name : 'edit', className : 'edit', link : 'edit'}, {name : 'delete', className : 'delete', link : 'delete'}]
-  };
+    columns : [
+      {title : 'Code', name : 'code'},
+      {title : 'Diagnosis', name : 'info'},
+      {title : 'Addition Date', name : 'addedDate'}
+   ],
+   buttons: [{name : 'edit', className : 'edit', link : 'edit'}, {name : 'delete', className : 'delete', link : 'delete'}]
+  }
   dataHistoryDiagnoses : any = {
     title : 'Diagnoses History',
-    records : []
+    records : [],
+    columns : [
+      {title : 'Code', name : 'code'},
+      {title : 'Diagnosis', name : 'info'},
+      {title : 'Addition Date', name : 'addedDate'},
+      {title : 'Removal Date', name : 'removedDate'}
+    ]
   };
 
   constructor(
@@ -28,24 +39,22 @@ export class DiagnosesListComponent implements OnInit{
     private location: Location
   ) {}
   ngOnInit(): void {
-    const id = +this.location.path().split('/')[2];
-    this.diagnosesListService.getDiagnoses(id)
-      .then(data => {
-        this.diagnoses = data;
-        this.dataCurrentDiagnoses.records = this.diagnoses.filter(diagnosis => diagnosis.removed === false);
-        this.dataCurrentDiagnoses.columns = [
-          {title : 'Code', name : 'code'},
-          {title : 'Diagnosis', name : 'info'},
-          {title : 'Addition Date', name : 'addedDate'}
-        ];
-        this.dataHistoryDiagnoses.records = this.diagnoses.filter(diagnosis => diagnosis.removed === true);
-        this.dataHistoryDiagnoses.columns = [
-          {title : 'Code', name : 'code'},
-          {title : 'Diagnosis', name : 'info'},
-          {title : 'Addition Date', name : 'addedDate'},
-          {title : 'Removal Date', name : 'removedDate'}
-        ];
-      });
+     this.updateData();
+     this.diagnosesListService.diagnosisIsDelete.subscribe(
+          isDelete => {
+              this.updateData();
+          }
+    );
   }
+  updateData(): void {
+      const id = +this.location.path().split('/')[2];
+      this.diagnosesListService.getDiagnoses(id)
+          .then(data => {
+              this.diagnoses = data;
+              this.dataCurrentDiagnoses.records = this.diagnoses.filter(diagnosis => diagnosis.removed === false);
+              this.dataHistoryDiagnoses.records = this.diagnoses.filter(diagnosis => diagnosis.removed === true);
+          });
+  }
+ }
 }
 

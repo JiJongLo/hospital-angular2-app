@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Router }       from '@angular/router';
@@ -13,6 +13,7 @@ import 'rxjs/add/operator/mergeMap';
  */
 @Injectable()
 export class DiagnosesListService {
+  diagnosisIsDelete = new EventEmitter<boolean>();
   /**
    * Creates a new NameListService with the injected Http.
    * @param {Http} http - The injected Http.
@@ -51,12 +52,35 @@ export class DiagnosesListService {
       );
     });
   }
-  handleEvent(data:any): void {
+  deleteDiagnosis(id: string): Promise<any> {
+    return new Promise (resolve => {
+        const info = JSON.parse(localStorage.getItem('info'));
+        info.diagnoses.forEach(rec => {
+            if(rec.code === id) {
+                rec.removed = true;
+                const year = new Date().getFullYear();
+                const month = new Date().getMonth() + 1;
+                const date  = new Date().getDate();
+                rec.removedDate = `${date}/${month}/${year}`;
+            }
+        });
+        localStorage.setItem('info', JSON.stringify(info));
+        resolve(this.diagnosisIsDelete.emit(true));
+    });
+  }
+
+  handleEvent(data:any): Promise<any> {
+      return new Promise (resolve => {
       if(data.type === 'edit') {
           const path = this.location.path();
-          this.router.navigate([`${path}/${data.id}`]);
+          resolve(this.router.navigate([`${path}/${data.id}`]));
       }
+      if(data.type === 'delete') {
+         return resolve(this.deleteDiagnosis(data.id));
+      }
+    });
   }
+
   editDiagnoses(id: number): Observable<any> {
     return this.get()
         .flatMap(data => data.diagnoses)
