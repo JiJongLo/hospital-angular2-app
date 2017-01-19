@@ -9,6 +9,7 @@ import { DiagnosesListService } from '../../shared/index';
 })
 export class GridComponent {
     @Input() records: Array<any> = [];
+    @Input() title: string = '';
     @Input() columns: any = {};
     @Input() additionElements:  Array<any> = [];
     @Output() click = new EventEmitter<string>();
@@ -17,6 +18,6 @@ export class GridComponent {
       private diagnosesListService: DiagnosesListService
     ) {}
     handle (data: any) {
-       this.diagnosesListService.handleEvent(data)
+       this.diagnosesListService.handleEvent(data);
     }
 }
