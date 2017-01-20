@@ -22,7 +22,7 @@ export class DiagnosesListComponent implements OnInit{
       {title : 'Addition Date', name : 'addedDate'}
    ],
    buttons: [{name : 'edit', className : 'edit', link : 'edit'}, {name : 'delete', className : 'delete', link : 'delete'}]
-  }
+  };
   dataHistoryDiagnoses : any = {
     title : 'Diagnoses History',
     records : [],

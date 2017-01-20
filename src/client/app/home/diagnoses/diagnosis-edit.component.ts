@@ -27,7 +27,7 @@ export class DiagnosisEditComponent implements OnInit {
     }
     onSubmit(form:NgForm) {
         if (this.diagnosis) {
-         console.log(form.value);
+            this.diagnosesListService.updateDiagnoses(form.value);
         } else {
            form.reset();
         }

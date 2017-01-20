@@ -45,6 +45,29 @@ export class DiagnosesListService {
       );
     });
   }
+  updateDiagnoses(data : any): Promise<any> {
+    return new Promise (resolve => {
+        this.get().subscribe(
+             response => {
+               const path = this.location.path().split('/');
+               const patientId = path[2];
+               const diagnosisId = path[3];
+               if(diagnosisId === 'new') {
+                  const newDiagnosis = new Diagnosis(data.info, data.code, +patientId);
+                  console.log(newDiagnosis);
+                  response.diagnoses.push(newDiagnosis);
+               } else {
+                  const diagnosis = response.diagnoses.find(rec => rec.code === diagnosisId);
+                  diagnosis.code = data.code;
+                  diagnosis.info = data.info;
+               }
+                localStorage.setItem('info', JSON.stringify(response));
+                resolve(this.router.navigate([`patients/${patientId}`]));
+                this.diagnosisIsDelete.emit(true);
+             }
+        );
+    });
+  }
   getDiagnoses(id: number): Promise<any> {
     return new Promise (resolve => {
       this.get().subscribe(
