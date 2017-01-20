@@ -4,7 +4,7 @@
   <div class="col l6 m12 s12">
     <div class="form-group">
       <label for="code" data-error="Must be number">Code *</label>
-      <input  type="text" minlength="6"  [(ngModel)]="diagnosis.code" name="code" class="form-control validate" id="code" #code="ngModel" required>
+      <input  type="text" minlength="6"  [(ngModel)]="diagnosis.code" name="code" class="form-control validate" id="code" #code="ngModel"  pattern="^\d+$" required>
       <div *ngIf="code.errors && (code.dirty || code.touched)">
           <div [hidden]="!code.required">
           Code is required
