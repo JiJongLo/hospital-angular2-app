@@ -1,5 +1,6 @@
 .container-height {
   height: 100%;
+  margin-bottom: 0;
 }
 .container-patient {
   background-color: grey;
