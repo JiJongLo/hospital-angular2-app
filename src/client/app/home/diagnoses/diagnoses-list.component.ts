@@ -41,10 +41,14 @@ export class DiagnosesListComponent implements OnInit{
   ngOnInit(): void {
      this.updateData();
      this.diagnosesListService.diagnosisIsDelete.subscribe(
-          isDelete => {
+       (isDelete : boolean) => {
               this.updateData();
           }
     );
+  }
+  addDiagnosis(): void {
+    const id = +this.location.path().split('/')[2];
+    this.diagnosesListService.addDiagnoses(id);
   }
   updateData(): void {
       const id = +this.location.path().split('/')[2];
@@ -55,6 +59,5 @@ export class DiagnosesListComponent implements OnInit{
               this.dataHistoryDiagnoses.records = this.diagnoses.filter(diagnosis => diagnosis.removed === true);
           });
   }
- }
 }
 

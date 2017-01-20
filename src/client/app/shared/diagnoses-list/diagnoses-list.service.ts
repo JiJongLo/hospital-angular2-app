@@ -55,7 +55,7 @@ export class DiagnosesListService {
   deleteDiagnosis(id: string): Promise<any> {
     return new Promise (resolve => {
         const info = JSON.parse(localStorage.getItem('info'));
-        info.diagnoses.forEach(rec => {
+        info.diagnoses.forEach((rec:any) => {
             if(rec.code === id) {
                 rec.removed = true;
                 const year = new Date().getFullYear();
@@ -65,10 +65,13 @@ export class DiagnosesListService {
             }
         });
         localStorage.setItem('info', JSON.stringify(info));
-        resolve(this.diagnosisIsDelete.emit(true));
+        this.diagnosisIsDelete.emit(true);
+        resolve(true);
     });
   }
-
+  addDiagnoses(id: number) {
+       this.router.navigate([`patients/${id}/new`]);
+  }
   handleEvent(data:any): Promise<any> {
       return new Promise (resolve => {
       if(data.type === 'edit') {
@@ -81,10 +84,10 @@ export class DiagnosesListService {
     });
   }
 
-  editDiagnoses(id: number): Observable<any> {
+  editDiagnoses(id: string): Observable<any> {
     return this.get()
         .flatMap(data => data.diagnoses)
-        .find((diagnosis:Diagnosis)  => +diagnosis.code === id);
+        .find((diagnosis:Diagnosis)  => diagnosis.code === id);
   }
   /**
     * Handle HTTP error

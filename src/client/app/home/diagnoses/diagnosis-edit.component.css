@@ -16,3 +16,6 @@ input:not([type]):focus, input[type=text], input[type=password], input[type=emai
   border-bottom: none;
   box-shadow: none;
 }
+.toolbar-list {
+  background-color: #3dbafc
+}
