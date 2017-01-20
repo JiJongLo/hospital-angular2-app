@@ -54,7 +54,6 @@ export class DiagnosesListService {
                const diagnosisId = path[3];
                if(diagnosisId === 'new') {
                   const newDiagnosis = new Diagnosis(data.info, data.code, +patientId);
-                  console.log(newDiagnosis);
                   response.diagnoses.push(newDiagnosis);
                } else {
                   const diagnosis = response.diagnoses.find(rec => rec.code === diagnosisId);
