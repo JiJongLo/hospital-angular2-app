@@ -1,6 +1,5 @@
-import 'rxjs/add/operator/switchMap';
 import { Component, OnInit }      from '@angular/core';
-import { DiagnosesListService } from '../../shared/index';
+import { DiagnosesListService } from './diagnoses-list.service';
 import { Diagnosis } from './Diagnosis';
 import { Location } from '@angular/common';
 
@@ -11,7 +10,7 @@ import { Location } from '@angular/common';
     styleUrls: ['diagnoses-list.component.css'],
 })
 
-export class DiagnosesListComponent implements OnInit{
+export class DiagnosesListComponent implements OnInit {
   diagnoses: Diagnosis[] = [];
   dataCurrentDiagnoses : any = {
     title : 'Current Diagnoses',
@@ -41,9 +40,7 @@ export class DiagnosesListComponent implements OnInit{
   ngOnInit(): void {
      this.updateData();
      this.diagnosesListService.diagnosisIsDelete.subscribe(
-       (isDelete : boolean) => {
-              this.updateData();
-          }
+       () => this.updateData()
     );
   }
   addDiagnosis(): void {

@@ -1,8 +1,7 @@
-import 'rxjs/add/operator/switchMap';
 import { Component, OnInit }      from '@angular/core';
 import { NgForm }      from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { DiagnosesListService } from '../../shared/index';
+import { DiagnosesListService } from './diagnoses-list.service';
 @Component({
     moduleId: module.id,
     selector: 'diagnoses-edit',

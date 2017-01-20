@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { GridComponent } from './grid/index';
 import { ToolbarComponent } from './toolbar/index';
 import { NavbarComponent } from './navbar/index';
-import { DiagnosesListService } from './diagnoses-list/index';
+import { DiagnosesListService } from '../home/diagnoses/index';
 import { MdDataTable } from 'ng2-material/components/data-table/index';
 import { MaterialModule } from '@angular/material';
 /**

@@ -8,9 +8,9 @@ export class Diagnosis {
     constructor(info:string,
                 code:string,
                 patientId: number,
-                removed?:boolean = false,
-                addedDate?:string = `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`,
-                removedDate?:string = '', ) {
+                removed:boolean = false,
+                addedDate:string = `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`,
+                removedDate:string = '', ) {
         this.info = info;
         this.code = code;
         this.addedDate = addedDate;

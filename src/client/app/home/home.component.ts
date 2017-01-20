@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DiagnosesListService } from '../shared/index';
+import { DiagnosesListService } from './diagnoses/index';
 
 /**
  * This class represents the lazy loaded HomeComponent.

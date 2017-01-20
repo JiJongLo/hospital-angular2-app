@@ -4,10 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Router }       from '@angular/router';
 import { Location } from '@angular/common';
 import { Diagnosis } from '../../home/diagnoses/Diagnosis';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/find';
-import 'rxjs/add/operator/mergeMap';
+
 /**
  * This class provides the List service with methods to read diagnoses and history.
  */
@@ -56,7 +53,7 @@ export class DiagnosesListService {
                   const newDiagnosis = new Diagnosis(data.info, data.code, +patientId);
                   response.diagnoses.push(newDiagnosis);
                } else {
-                  const diagnosis = response.diagnoses.find(rec => rec.code === diagnosisId);
+                  const diagnosis = response.diagnoses.find((rec: Diagnosis) => rec.code === diagnosisId);
                   diagnosis.code = data.code;
                   diagnosis.info = data.info;
                }

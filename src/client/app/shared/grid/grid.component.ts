@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { DiagnosesListService } from '../../shared/index';
+import { DiagnosesListService } from '../../home/diagnoses/index';
 
 @Component({
   moduleId: module.id,
