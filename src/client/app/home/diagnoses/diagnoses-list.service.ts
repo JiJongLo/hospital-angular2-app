@@ -42,6 +42,11 @@ export class DiagnosesListService {
       );
     });
   }
+  clearDate() {
+      if (localStorage && localStorage.getItem('info')) {
+          return Observable.create((observer:any) => observer.next(localStorage.setItem('info', null)));
+      }
+  }
   updateDiagnoses(data : any): Promise<any> {
     return new Promise (resolve => {
         this.get().subscribe(

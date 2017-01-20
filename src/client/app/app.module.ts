@@ -8,6 +8,8 @@ import { MaterialModule } from '@angular/material';
 import { AboutModule } from './about/about.module';
 import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
+import { PageNotFoundComponent }   from './page-not-found.component';
+
 @NgModule({
   imports: [BrowserModule,
     HttpModule,
@@ -17,8 +19,7 @@ import { SharedModule } from './shared/shared.module';
     SharedModule.forRoot(),
     MaterialModule.forRoot()
   ],
-  declarations: [AppComponent
-  ],
+  declarations: [AppComponent, PageNotFoundComponent],
   providers: [{
     provide: APP_BASE_HREF,
     useValue: '<%= APP_BASE %>'

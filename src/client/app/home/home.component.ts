@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DiagnosesListService } from './diagnoses/index';
 
 /**
@@ -10,7 +10,7 @@ import { DiagnosesListService } from './diagnoses/index';
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   errorMessage: string;
   patients: any[] = [];
 
@@ -28,7 +28,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getPatients();
   }
-
+  ngOnDestroy() {
+    this.diagnosesListService.clearDate()
+  }
   /**
    * Handle the diagnosesListService observable
    */

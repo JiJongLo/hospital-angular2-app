@@ -18,7 +18,10 @@ export class DiagnosesContainerComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.route.params
-      .switchMap((params: Params) => this.diagnosesListService.getPatient(+params['id']))
+      .switchMap((params: Params) => {
+           const id = +params['id'];
+           return this.diagnosesListService.getPatient(id);
+      })
       .subscribe(data =>  this.patient = data);
   }
   goToBack() {
