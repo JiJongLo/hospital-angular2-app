@@ -1,6 +1,7 @@
 <md-toolbar class="toolbar-list" [style.display]="diagnosis.info ? 'block' : 'none'">Edit diagnosis:</md-toolbar>
-<md-toolbar class="toolbar-list" [style.display]="diagnosis.info ? 'none' : 'block'">Add diagnosis:</md-toolbar>
-<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+<md-toolbar class="toolbar-list" [style.display]="patientInfo ? 'block' : 'none'">Edit patient:</md-toolbar>
+<md-toolbar class="toolbar-list" [style.display]="diagnosis.info || patientInfo ? 'none' : 'block'">Add diagnosis:</md-toolbar>
+<form *ngIf="!patientInfo" (ngSubmit)="onSubmit(f)" #f="ngForm">
   <div class="col l6 m12 s12">
     <div class="form-group">
       <label for="code" data-error="Must be number">Code *</label>
@@ -28,3 +29,4 @@
         <div class="col s4"> <button md-button  type="submit" >Save</button></div>
     </div>
 </form>
+<patient-edit *ngIf="patientInfo" [patient]="patient"></patient-edit>

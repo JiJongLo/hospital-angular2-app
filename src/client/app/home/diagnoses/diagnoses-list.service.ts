@@ -11,6 +11,7 @@ import { Diagnosis } from '../../home/diagnoses/Diagnosis';
 @Injectable()
 export class DiagnosesListService {
   diagnosisIsDelete = new EventEmitter<boolean>();
+  patientIsChanged = new EventEmitter<any>();
   /**
    * Creates a new NameListService with the injected Http.
    * @param {Http} http - The injected Http.
@@ -107,9 +108,35 @@ export class DiagnosesListService {
       }
     });
   }
+  updatePatient(data : any) {
+      return new Promise (resolve => {
+          this.get().subscribe(
+              response => {
+                  const path = this.location.path().split('/');
+                  const patientId = +path[2];
+                  const patient = response.patients.find(patient => patient.id === patientId);
+                  patient.name =  data.name;
+                  patient.birthDay =  data.birthDay;
+                  patient.fullAddress =  data.fullAddress;
+                  localStorage.setItem('info', JSON.stringify(response));
+                  resolve(this.router.navigate([`patients/${patientId}`]));
+                  this.patientIsChanged.emit(patient);
+              }
+          );
+      });
+  }
+  editPatient(id : number) {
+    return this.get()
+          .flatMap(data => data.patients)
+          .find(patient => patient.id === id);
+  }
 
   editDiagnoses(id: string): Observable<any> {
-    return this.get()
+    if(id === 'add') {
+      const path = this.location.path().split('/');
+      const patientId = +path[2];
+      return this.editPatient(patientId);
+    } else return this.get()
         .flatMap(data => data.diagnoses)
         .find((diagnosis:Diagnosis)  => diagnosis.code === id);
   }

@@ -1,23 +1,23 @@
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, Input }      from '@angular/core';
 import { NgForm }      from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { DiagnosesListService } from '../diagnoses/diagnoses-list.service';
 @Component({
     moduleId: module.id,
-    selector: 'diagnoses-edit',
+    selector: 'patient-edit',
     templateUrl: 'patient-edit.component.html',
     styleUrls: ['patient-edit.component.css'],
 })
 export class PatientEditComponent implements OnInit {
-    patient: any = {};
+    @Input() patient: any = {};
     constructor(
         private diagnosesListService: DiagnosesListService,
         private route: ActivatedRoute
     ) {}
-    ngOnInit(): void { }
+    ngOnInit(): void {}
     onSubmit(form:NgForm) {
         if (this.patient) {
-            this.diagnosesListService.updateDiagnoses(form.value);
+            this.diagnosesListService.updatePatient(form.value);
         } else {
             form.reset();
         }

@@ -18,6 +18,7 @@ import { DiagnosesContainerComponent, DiagnosisEditComponent, DiagnosesListCompo
           },
           {
             path: ':id',
+            data: { preload: true },
             component: DiagnosisEditComponent
           }
         ]

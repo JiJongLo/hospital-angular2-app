@@ -23,6 +23,11 @@ export class DiagnosesContainerComponent implements OnInit {
            return this.diagnosesListService.getPatient(id);
       })
       .subscribe(data =>  this.patient = data);
+    this.diagnosesListService.patientIsChanged.subscribe(
+        data => {
+          this.patient = data
+        }
+    )
   }
   goToBack() {
     this.router.navigate(['../patients']);

@@ -13,23 +13,29 @@ export class DiagnosisEditComponent implements OnInit {
      info : '',
      code : ''
    };
-    constructor(
+   patient : any = {};
+   patientInfo : boolean = false;
+   constructor(
         private diagnosesListService: DiagnosesListService,
         private route: ActivatedRoute
-    ) {}
-    ngOnInit(): void {
-        this.route.params
-            .switchMap((params: Params) => this.diagnosesListService.editDiagnoses(params['id']))
-            .subscribe(data => {
-              if (data) this.diagnosis = data;
-            });
-    }
-    onSubmit(form:NgForm) {
-        if (this.diagnosis) {
-            this.diagnosesListService.updateDiagnoses(form.value);
-        } else {
-           form.reset();
-        }
+   ) {}
+   ngOnInit(): void {
+     this.route.params
+         .switchMap((params: Params) => this.diagnosesListService.editDiagnoses(params['id']))
+         .subscribe(data => {
+            if (data.id) {
+              this.patientInfo = true;
+              this.patient = data;
+            };
+            if (data) this.diagnosis = data;
+         });
+   }
+   onSubmit(form:NgForm) {
+     if (this.diagnosis) {
+       this.diagnosesListService.updateDiagnoses(form.value);
+     } else {
+       form.reset();
+     }
 
     }
 }
