@@ -24,8 +24,8 @@ export class DiagnosesContainerComponent implements OnInit {
       })
       .subscribe(data =>  this.patient = data);
     this.diagnosesListService.patientIsChanged.subscribe(
-        data => {
-          this.patient = data
+        (data:any) => {
+          this.patient = data;
         }
     )
   }

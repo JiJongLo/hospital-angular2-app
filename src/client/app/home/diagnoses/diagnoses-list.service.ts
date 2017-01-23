@@ -114,7 +114,7 @@ export class DiagnosesListService {
               response => {
                   const path = this.location.path().split('/');
                   const patientId = +path[2];
-                  const patient = response.patients.find(patient => patient.id === patientId);
+                  const patient = response.patients.find((patient:any) => patient.id === patientId);
                   patient.name =  data.name;
                   patient.birthDay =  data.birthDay;
                   patient.fullAddress =  data.fullAddress;

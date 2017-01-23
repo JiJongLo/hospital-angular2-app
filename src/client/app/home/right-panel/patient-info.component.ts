@@ -16,12 +16,12 @@ export class PatientInfoComponent implements OnInit {
   constructor(private diagnosesListService: DiagnosesListService, private router: Router) {}
   ngOnInit(): void {
     this.diagnosesListService.patientIsChanged.subscribe(
-        data => {
+        (data : any) => {
           this.nameOfPatient = data.name;
           this.birthday = data.birthday;
           this.fullAddress = data.fullAddress;
         }
-    )
+    );
   }
   handle(id : number) {
       this.diagnosesListService.editPatient(id).subscribe(
